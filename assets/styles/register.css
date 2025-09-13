@@ -1,0 +1,41 @@
+
+.image-section {
+    background: linear-gradient(rgba(13, 71, 161, 0.7), rgba(13, 71, 161, 0.7)), url('../imgs/register.avif') center/cover;
+}
+
+.form-section {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.logo h2 {
+    font-size: 2rem;
+}
+
+.registration-form {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+input[type='date'], .gender-icon {
+    margin-bottom: 1.3rem;
+}
+
+#registration-error {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+

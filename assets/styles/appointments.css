@@ -1,0 +1,170 @@
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.tablink {
+  background: none;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-light);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tablink.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.tablink.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary);
+}
+
+.tabcontent {
+  display: none;
+  animation: fadeEffect 0.5s;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.appointment-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: between;
+  align-items: center;
+}
+
+.appointment-info {
+  flex: 1;
+}
+
+.appointment-info h3 {
+  margin: 0 0 10px 0;
+  color: var(--primary);
+}
+
+.appointment-info p {
+  margin: 5px 0;
+  color: var(--text);
+}
+
+.appointment-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.badge {
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-light);
+}
+
+.empty-state img {
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  margin: 10px 0;
+  color: var(--text-light);
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  animation: modalFade 0.3s;
+}
+
+.modal-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--text);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.medicines-container {
+  margin-bottom: 20px;
+}
+
+.medicine-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #f9f9f9;
+}
