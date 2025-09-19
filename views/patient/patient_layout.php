@@ -1,15 +1,15 @@
 <?php
 session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'patient') {
     header("Location: ../login.php");
     exit();
 }
 
 $user = $_SESSION['user'];
-$pageTitle = "Admin Dashboard";
+$pageTitle = "Patient Dashboard";
 
 // Determine current page for active navigation
-$currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 'patient_dashboard';
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
 
 <body>
     <div class="dashboard-container">
-        <?php include 'admin_sidebar.php'; ?>
+        <?php include 'patient_sidebar.php'; ?>
 
         <div class="dashboard-content">
             <?php
@@ -38,11 +38,11 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
                     if (file_exists($file)) {
                         include $file;
                     } else {
-                        include 'admin_dashboard.php';
+                        include 'patient_dashboard.php';
                     }
                 }
             } else {
-                include 'admin_dashboard.php';
+                include 'patient_dashboard.php';
             }
             ?>
         </div>

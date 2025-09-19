@@ -49,7 +49,6 @@ class UserModel
         }
     }
 
-
     // Get user by ID
     public function getUserById($userId)
     {
@@ -154,4 +153,30 @@ class UserModel
             "user" => $user
         ];
     }
+
+    // Get all users
+    public function getAllUsers()
+    {
+        $sql = "SELECT user_id, first_name, last_name, email, dob, gender, role, is_banned, created_at 
+                FROM users 
+                ORDER BY created_at DESC";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Update ban/unban status
+    public function updateBanStatus($userId, $isBanned)
+    {
+        $newstatus = $isBanned ? 0 : 1; 
+        $sql = "UPDATE users SET is_banned = :newstatus WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+
+        return $stmt->execute([
+            ':newstatus' => $newstatus,
+            ':user_id' => $userId
+        ]);
+    }
+
 }

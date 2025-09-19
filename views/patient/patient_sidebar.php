@@ -1,11 +1,12 @@
 <?php
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'patient') {
     header("Location: ../login.php");
     exit();
 }
 
 // Determine current page for active navigation
-$currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 'patient_dashboard';
 ?>
 
 <div class="dashboard-sidebar">
@@ -16,21 +17,27 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
     
     <ul class="sidebar-nav">
         <li>
-            <a href="?page=admin_dashboard" class="nav-link <?php echo $currentPage === 'admin_dashboard' ? 'active' : ''; ?>">
+            <a href="?page=patient_dashboard" class="nav-link <?php echo $currentPage === 'patient_dashboard' ? 'active' : ''; ?>">
                 <img src="../../assets/icons/dashboard.svg" alt="Dashboard">
                 <span>Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="?page=manage_users" class="nav-link <?php echo $currentPage === 'manage_users' ? 'active' : ''; ?>">
-                <img src="../../assets/icons/users.svg" alt="Manage Users">
-                <span>Manage Users</span>
+            <a href="?page=find_doctors" class="nav-link <?php echo $currentPage === 'find_doctors' ? 'active' : ''; ?>">
+                <img src="../../assets/icons/user-md.svg" alt="Find Doctors">
+                <span>Find Doctors</span>
             </a>
         </li>
         <li>
-            <a href="?page=manage_reports" class="nav-link <?php echo $currentPage === 'manage_reports' ? 'active' : ''; ?>">
-                <img src="../../assets/icons/reports.svg" alt="Manage Reports">
-                <span>Manage Reports</span>
+            <a href="?page=my_appointments" class="nav-link <?php echo $currentPage === 'my_appointments' ? 'active' : ''; ?>">
+                <img src="../../assets/icons/calendar-check.svg" alt="My Appointments">
+                <span>My Appointments</span>
+            </a>
+        </li>
+        <li>
+            <a href="?page=my_prescriptions" class="nav-link <?php echo $currentPage === 'my_prescriptions' ? 'active' : ''; ?>">
+                <img src="../../assets/icons/prescription-blue.svg" alt="My Prescriptions">
+                <span>My Prescriptions</span>
             </a>
         </li>
         <li>
