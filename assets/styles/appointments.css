@@ -87,6 +87,11 @@
   font-size: 0.8rem;
 }
 
+.status-confirmed {
+    background-color: #ffb85c38; 
+    color: #ff9100 ;
+}
+
 .empty-state {
   text-align: center;
   padding: 40px 20px;
@@ -167,4 +172,55 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   background: #f9f9f9;
+}
+
+/* Appointment Buttons */
+.appointment-actions .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 8px;
+}
+
+.appointment-actions .btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.appointment-actions .btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.appointment-actions .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.appointment-actions .btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.appointment-actions .btn-primary {
+    background-color: #1a75bc;
+    color: #fff;
+}
+
+.appointment-actions .btn-primary:hover {
+    background-color: #0d47a1;
+    transform: translateY(-1px);
+}
+
+.appointment-actions .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.appointment-actions .btn-secondary:hover {
+    background-color: #5a6268;
 }

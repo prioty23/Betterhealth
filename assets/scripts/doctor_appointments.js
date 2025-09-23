@@ -31,16 +31,43 @@ document.querySelectorAll(".close").forEach((closeBtn) => {
 });
 
 
+// AJAX functions
 function approveAppointment(id) {
-  alert("Appointment " + id + " approved!");
+  fetch(
+    `../../controllers/AppointmentController.php?action=approve&appointment_id=${id}&scheduled_datetime=${encodeURIComponent(
+      new Date().toISOString().slice(0, 19)
+    )}`
+  )
+    .then((res) => res.text())
+    .then((data) => {
+      alert("Appointment approved successfully.");
+      location.reload();
+    })
+    .catch((err) => console.error(err));
 }
 
 function rejectAppointment(id) {
-  if (confirm("Are you sure you want to reject this appointment?")) {
-    alert("Appointment " + id + " rejected!");
-  }
+  if (!confirm("Are you sure you want to reject this appointment?")) return;
+
+  fetch(
+    `../../controllers/AppointmentController.php?action=reject&appointment_id=${id}`
+  )
+    .then((res) => res.text())
+    .then((data) => {
+      alert("Appointment rejected successfully.");
+      location.reload();
+    })
+    .catch((err) => console.error(err));
 }
 
 function markAsCompleted(id) {
-  alert("Appointment " + id + " marked as completed!");
+  fetch(
+    `../../controllers/AppointmentController.php?action=complete&appointment_id=${id}`
+  )
+    .then((res) => res.text())
+    .then((data) => {
+      alert("Appointment marked as completed.");
+      location.reload();
+    })
+    .catch((err) => console.error(err));
 }
