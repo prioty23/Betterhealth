@@ -4,7 +4,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'patient') {
     exit();
 }
 
-require_once "../../models/ScheduleModel.php";
+include_once "../../models/ScheduleModel.php";
 
 if (!isset($_GET['doctor_id'])) {
     echo "Doctor not specified.";
