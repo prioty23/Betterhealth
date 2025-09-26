@@ -71,3 +71,14 @@ function markAsCompleted(id) {
     })
     .catch((err) => console.error(err));
 }
+
+function openPrescriptionModal(appointmentId, patientName) {
+  document.getElementById("prescriptionAppointmentId").value = appointmentId;
+  document.getElementById("prescriptionPatient").value = patientName;
+  document.getElementById("prescriptionNotes").value = "";
+  document.getElementById("prescriptionModal").style.display = "block";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}

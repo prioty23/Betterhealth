@@ -111,7 +111,10 @@ $completed_appointments = getAllAppointments($user['user_id'], "completed");
                                     <button class="btn btn-secondary" onclick="viewPrescription('<?php echo $appointment['id']; ?>')">View Prescription</button>
                                 <?php endif; ?> -->
 
-                            <button class="btn btn-primary" onclick="addPrescription('<?php echo $appointment['id']; ?>', '<?php echo $appointment['patient']; ?>')">Add Prescription</button>
+                            <button class="btn btn-primary"
+                                onclick="openPrescriptionModal('<?php echo $appointment['id']; ?>', '<?php echo $appointment['patient']; ?>')">
+                                Add Prescription
+                            </button>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -125,5 +128,34 @@ $completed_appointments = getAllAppointments($user['user_id'], "completed");
         <?php endif; ?>
     </div>
 </div>
+
+<!-- Prescription Modal -->
+<div id="prescriptionModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('prescriptionModal')">&times;</span>
+    <h2>Add Prescription</h2>
+
+    <form id="prescriptionForm" 
+          action="../../controllers/managePrescription.php" 
+          method="POST">
+      
+      <input type="hidden" name="appointment_id" id="prescriptionAppointmentId">
+      <input type="hidden" name="action" value="add_prescription">
+      <input type="hidden" name="doctor_id" value="<?php echo $_SESSION['user']['user_id']; ?>">
+      <div class="form-group">
+        <label>Patient</label>
+        <input type="text" id="prescriptionPatient" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Prescription Notes</label>
+        <textarea name="notes" id="prescriptionNotes" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save Prescription</button>
+    </form>
+  </div>
+</div>
+
 
 <script src="../../assets/scripts/doctor_appointments.js"></script>

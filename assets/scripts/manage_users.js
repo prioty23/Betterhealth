@@ -61,12 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
           action: "delete",
           user_id: userId,
         });
-
         fetch(
           "/better health/controllers/manageUsersController.php?" +
             params.toString()
         )
-          .then((res) => res.text())
+          .then((res) => {
+            res.text();
+            console.log(res);
+          })
           .catch((err) => console.error("Fetch error:", err));
 
         setTimeout(() => {

@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['error'] = $_GET['action'];
     $action = $_GET['action'];
     $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : null;
-   
 
     switch ($action) {
         case 'delete':
@@ -50,6 +49,9 @@ function deleteUser($userId)
     }
 
     $result = $userModel->deleteUser($userId);
+
+        $_SESSION['errorss'] = $result;
+
     if ($result['success']) {
         $_SESSION['admin_success'] = $result['message'];
     } else {

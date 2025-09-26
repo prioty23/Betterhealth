@@ -119,9 +119,20 @@ class UserModel
     // Delete user
     public function deleteUser($userId)
     {
-        $sql = "DELETE FROM users WHERE user_id = :user_id";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([':user_id' => $userId]);
+        try {
+            $sql = "DELETE FROM users WHERE user_id = :user_id";
+            $stmt = $this->conn->prepare($sql);
+            $success = $stmt->execute([':user_id' => $userId]);
+
+            if ($success) {
+                return ['success' => true, 'message' => 'User deleted successfully.'];
+            } else {
+                return ['success' => false, 'message' => 'Failed to delete user.'];
+            }
+        } catch (PDOException $e) {
+            error_log("Database error while deleting user: " . $e->getMessage());
+            return ['success' => false, 'message' => 'Database error: ' . $e->getMessage()];
+        }
     }
 
     // Login user
@@ -169,7 +180,7 @@ class UserModel
     // Update ban/unban status
     public function updateBanStatus($userId, $isBanned)
     {
-        $newstatus = $isBanned ? 0 : 1; 
+        $newstatus = $isBanned ? 0 : 1;
         $sql = "UPDATE users SET is_banned = :newstatus WHERE user_id = :user_id";
         $stmt = $this->conn->prepare($sql);
 
@@ -179,4 +190,61 @@ class UserModel
         ]);
     }
 
+    // update account settings
+    public function updateAccountSettings($userId, $newPassword, $oldPassword, $profilePic, $phone, $address, $gender, $dob, $bio)
+    {
+        if (!empty($newPassword)) {
+            $checkSql = "SELECT password FROM users WHERE user_id = :user_id";
+            $checkStmt = $this->conn->prepare($checkSql);
+            $checkStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $checkStmt->execute();
+            $result = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$result || !password_verify($oldPassword, $result['password'])) {
+                return ['success' => false, 'message' => 'Password mismatch'];
+            }
+        }
+
+        // Build update fields
+        $fields = [
+            "phone = :phone",
+            "address = :address",
+            "gender = :gender",
+            "dob = :dob",
+            "bio = :bio"
+        ];
+
+        if (!empty($profilePic)) {
+            $fields[] = "profile_pic = :profile_pic";
+        }
+
+        if (!empty($newPassword)) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+            $fields[] = "password = :password";
+        }
+
+        $sql = "UPDATE users SET " . implode(", ", $fields) . " WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+        $stmt->bindParam(':gender', $gender, PDO::PARAM_STR);
+        $stmt->bindParam(':dob', $dob, PDO::PARAM_STR);
+        $stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+
+        if (!empty($profilePic)) {
+            $stmt->bindParam(':profile_pic', $profilePic, PDO::PARAM_STR);
+        }
+
+        if (!empty($newPassword)) {
+            $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+        }
+
+        $success = $stmt->execute();
+
+        return $success
+            ? ['success' => true, 'message' => 'Account updated successfully!']
+            : ['success' => false, 'message' => 'Failed to update account settings.'];
+    }
 }
