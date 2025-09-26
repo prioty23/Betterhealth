@@ -20,7 +20,6 @@ $users = getAllUsers();
     <h1>Manage Users</h1>
     <p>Manage doctors, patients, and admins</p>
 </div>
-
 <div class="dashboard-section">
     <!-- Filters -->
     <div class="filters" style="display:flex; gap:15px; margin-bottom:20px;">
@@ -97,5 +96,6 @@ $users = getAllUsers();
         </table>
     </div>
 </div>
+
 
 <script src="../../assets/scripts/manage_users.js"></script>

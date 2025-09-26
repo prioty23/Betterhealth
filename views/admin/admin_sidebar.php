@@ -30,7 +30,7 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 'admin_dashboard';
         <li>
             <a href="?page=manage_doctors" class="nav-link <?php echo $currentPage === 'manage_doctors' ? 'active' : ''; ?>">
                 <img src="../../assets/icons/hospital.svg" alt="Manage Doctors">
-                <span>Manage Doctors</span>
+                <span>Manage Doctors Departments</span>
             </a>
         </li>
         <li>
